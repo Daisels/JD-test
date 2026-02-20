@@ -3,42 +3,609 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JD Test Page</title>
+    <title>Lifestyle App</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            color: #1a1a2e;
             line-height: 1.6;
-            max-width: 800px;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.4);
+        }
+        nav .nav-inner {
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        h1 {
-            color: #333;
+        nav .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        nav .nav-links { display: flex; gap: 8px; }
+        nav .nav-links button {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        nav .nav-links button:hover,
+        nav .nav-links button.active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Main layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        /* Section tabs */
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Hero / greeting */
+        .hero {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
             text-align: center;
-            border-bottom: 2px solid #666;
-            padding-bottom: 10px;
         }
-        .content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .hero h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .hero p { opacity: 0.9; font-size: 1rem; }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
-        h2 {
-            color: #444;
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            transition: transform 0.15s, box-shadow 0.15s;
         }
-        p {
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: #1a1a2e;
+        }
+        .card p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Stat row */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stat {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+        .stat .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .stat .label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+        }
+        .checklist h2 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            user-select: none;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #667eea;
+            cursor: pointer;
+        }
+        .checklist-item.done .item-text {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        .item-text { font-size: 0.95rem; }
+        .item-tag {
+            margin-left: auto;
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .tag-fitness { background: #e8f5e9; color: #388e3c; }
+        .tag-nutrition { background: #fff3e0; color: #e65100; }
+        .tag-mindfulness { background: #e3f2fd; color: #1565c0; }
+        .tag-sleep { background: #ede7f6; color: #4527a0; }
+
+        /* Progress bar */
+        .progress-wrap {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+        }
+        .progress-wrap h2 { font-size: 1.2rem; margin-bottom: 16px; }
+        .progress-item { margin-bottom: 16px; }
+        .progress-item:last-child { margin-bottom: 0; }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.6s ease;
+        }
+
+        /* Water tracker */
+        .water-tracker {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .water-tracker h2 { font-size: 1.2rem; margin-bottom: 16px; }
+        .water-glasses {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .water-glass {
+            width: 40px;
+            height: 50px;
+            border: 2px solid #90caf9;
+            border-radius: 4px 4px 8px 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .water-glass.filled { background: #42a5f5; border-color: #1e88e5; }
+        .water-info { font-size: 0.9rem; color: #666; }
+
+        /* Meal log */
+        .meal-log {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+        }
+        .meal-log h2 { font-size: 1.2rem; margin-bottom: 16px; }
+        .meal-entry {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .meal-entry:last-child { border-bottom: none; }
+        .meal-icon { font-size: 1.5rem; }
+        .meal-details { flex: 1; }
+        .meal-name { font-weight: 600; font-size: 0.95rem; }
+        .meal-meta { font-size: 0.8rem; color: #888; }
+        .meal-cal { font-weight: 700; color: #667eea; }
+
+        /* Mood tracker */
+        .mood-tracker {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .mood-tracker h2 { font-size: 1.2rem; margin-bottom: 16px; }
+        .mood-options {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .mood-btn {
+            font-size: 2rem;
+            background: none;
+            border: 3px solid transparent;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .mood-btn:hover { transform: scale(1.15); }
+        .mood-btn.selected { border-color: #667eea; background: #f0f0ff; }
+        .mood-log { font-size: 0.9rem; color: #888; }
+
+        /* Quote */
+        .quote-box {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            border-radius: 14px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .quote-box blockquote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .quote-box cite {
+            font-size: 0.85rem;
             color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.4rem; }
+            .stat .value { font-size: 1.4rem; }
+            nav .nav-links button { padding: 6px 12px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to JD Test</h1>
-    <p>This is a simple test page.</p>
-    <div class="content">
-        <h2>About</h2>
-        <p>This page was created as a test project.</p>
+
+<nav>
+    <div class="nav-inner">
+        <div class="logo">LifeBalance</div>
+        <div class="nav-links">
+            <button class="active" onclick="showSection('dashboard')">Dashboard</button>
+            <button onclick="showSection('fitness')">Fitness</button>
+            <button onclick="showSection('nutrition')">Nutrition</button>
+            <button onclick="showSection('mindfulness')">Mindfulness</button>
+        </div>
     </div>
+</nav>
+
+<div class="container">
+
+    <!-- =================== DASHBOARD =================== -->
+    <div id="dashboard" class="section active">
+
+        <div class="hero">
+            <h1 id="greeting">Good morning!</h1>
+            <p>Here's your wellness snapshot for today.</p>
+        </div>
+
+        <div class="stat-row">
+            <div class="stat"><div class="value" id="steps">6,842</div><div class="label">Steps</div></div>
+            <div class="stat"><div class="value" id="calories-burned">320</div><div class="label">Cal Burned</div></div>
+            <div class="stat"><div class="value" id="water-count-stat">0 / 8</div><div class="label">Glasses</div></div>
+            <div class="stat"><div class="value" id="sleep-stat">7.5h</div><div class="label">Sleep</div></div>
+        </div>
+
+        <div class="checklist">
+            <h2>Daily Habits</h2>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <input type="checkbox"><span class="item-text">Morning stretch (10 min)</span>
+                <span class="item-tag tag-fitness">Fitness</span>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <input type="checkbox"><span class="item-text">Drink a green smoothie</span>
+                <span class="item-tag tag-nutrition">Nutrition</span>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <input type="checkbox"><span class="item-text">5-minute breathing exercise</span>
+                <span class="item-tag tag-mindfulness">Mindfulness</span>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <input type="checkbox"><span class="item-text">Take a 30-min walk</span>
+                <span class="item-tag tag-fitness">Fitness</span>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <input type="checkbox"><span class="item-text">Eat a balanced lunch</span>
+                <span class="item-tag tag-nutrition">Nutrition</span>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <input type="checkbox"><span class="item-text">Journal for 10 minutes</span>
+                <span class="item-tag tag-mindfulness">Mindfulness</span>
+            </div>
+            <div class="checklist-item" onclick="toggleCheck(this)">
+                <input type="checkbox"><span class="item-text">Lights out by 10:30 PM</span>
+                <span class="item-tag tag-sleep">Sleep</span>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <blockquote id="quote-text">"Take care of your body. It's the only place you have to live."</blockquote>
+            <cite id="quote-author">Jim Rohn</cite>
+        </div>
+
+    </div>
+
+    <!-- =================== FITNESS =================== -->
+    <div id="fitness" class="section">
+
+        <div class="hero">
+            <h1>Fitness</h1>
+            <p>Track your workouts and stay active.</p>
+        </div>
+
+        <div class="stat-row">
+            <div class="stat"><div class="value">3</div><div class="label">Workouts / Wk</div></div>
+            <div class="stat"><div class="value">45 min</div><div class="label">Avg Duration</div></div>
+            <div class="stat"><div class="value">6,842</div><div class="label">Steps Today</div></div>
+        </div>
+
+        <div class="progress-wrap">
+            <h2>Weekly Goals</h2>
+            <div class="progress-item">
+                <div class="progress-label"><span>Steps (50,000 / wk)</span><span>68%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:68%; background: linear-gradient(90deg, #667eea, #764ba2);"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-label"><span>Active minutes (150 / wk)</span><span>80%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:80%; background: linear-gradient(90deg, #43e97b, #38f9d7);"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-label"><span>Workouts (4 / wk)</span><span>75%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:75%; background: linear-gradient(90deg, #fa709a, #fee140);"></div></div>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="icon">🏃</div>
+                <h3>Morning Run</h3>
+                <p>3.2 km &middot; 22 min &middot; 180 cal</p>
+            </div>
+            <div class="card">
+                <div class="icon">🧘</div>
+                <h3>Yoga Flow</h3>
+                <p>30 min &middot; Flexibility &middot; 95 cal</p>
+            </div>
+            <div class="card">
+                <div class="icon">🏋️</div>
+                <h3>Strength Training</h3>
+                <p>45 min &middot; Upper body &middot; 250 cal</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== NUTRITION =================== -->
+    <div id="nutrition" class="section">
+
+        <div class="hero">
+            <h1>Nutrition</h1>
+            <p>Fuel your body the right way.</p>
+        </div>
+
+        <div class="stat-row">
+            <div class="stat"><div class="value" id="cal-consumed">1,240</div><div class="label">Cal Consumed</div></div>
+            <div class="stat"><div class="value">62g</div><div class="label">Protein</div></div>
+            <div class="stat"><div class="value">148g</div><div class="label">Carbs</div></div>
+            <div class="stat"><div class="value">44g</div><div class="label">Fat</div></div>
+        </div>
+
+        <div class="progress-wrap">
+            <h2>Daily Target (2,000 cal)</h2>
+            <div class="progress-item">
+                <div class="progress-label"><span>Calories</span><span>62%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:62%; background: linear-gradient(90deg, #667eea, #764ba2);"></div></div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-label"><span>Protein (120g goal)</span><span>52%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:52%; background: linear-gradient(90deg, #f093fb, #f5576c);"></div></div>
+            </div>
+        </div>
+
+        <div class="water-tracker">
+            <h2>Water Intake</h2>
+            <div class="water-glasses" id="water-glasses"></div>
+            <div class="water-info" id="water-info">0 of 8 glasses (0 ml)</div>
+        </div>
+
+        <div class="meal-log">
+            <h2>Today's Meals</h2>
+            <div class="meal-entry">
+                <div class="meal-icon">🥣</div>
+                <div class="meal-details">
+                    <div class="meal-name">Breakfast</div>
+                    <div class="meal-meta">Oatmeal, berries, almond butter</div>
+                </div>
+                <div class="meal-cal">420 cal</div>
+            </div>
+            <div class="meal-entry">
+                <div class="meal-icon">🥗</div>
+                <div class="meal-details">
+                    <div class="meal-name">Lunch</div>
+                    <div class="meal-meta">Grilled chicken salad, quinoa</div>
+                </div>
+                <div class="meal-cal">520 cal</div>
+            </div>
+            <div class="meal-entry">
+                <div class="meal-icon">🍎</div>
+                <div class="meal-details">
+                    <div class="meal-name">Snack</div>
+                    <div class="meal-meta">Apple, mixed nuts</div>
+                </div>
+                <div class="meal-cal">300 cal</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== MINDFULNESS =================== -->
+    <div id="mindfulness" class="section">
+
+        <div class="hero">
+            <h1>Mindfulness</h1>
+            <p>Calm your mind and find balance.</p>
+        </div>
+
+        <div class="stat-row">
+            <div class="stat"><div class="value">12</div><div class="label">Sessions / Mo</div></div>
+            <div class="stat"><div class="value">8 min</div><div class="label">Avg Session</div></div>
+            <div class="stat"><div class="value">5</div><div class="label">Day Streak</div></div>
+        </div>
+
+        <div class="mood-tracker">
+            <h2>How are you feeling today?</h2>
+            <div class="mood-options">
+                <button class="mood-btn" onclick="selectMood(this, 'Great')" title="Great">😄</button>
+                <button class="mood-btn" onclick="selectMood(this, 'Good')" title="Good">🙂</button>
+                <button class="mood-btn" onclick="selectMood(this, 'Okay')" title="Okay">😐</button>
+                <button class="mood-btn" onclick="selectMood(this, 'Low')" title="Low">😔</button>
+                <button class="mood-btn" onclick="selectMood(this, 'Stressed')" title="Stressed">😩</button>
+            </div>
+            <div class="mood-log" id="mood-log">Tap an emoji to log your mood.</div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="icon">🧘</div>
+                <h3>Guided Meditation</h3>
+                <p>10 min &middot; Focus &amp; calm</p>
+            </div>
+            <div class="card">
+                <div class="icon">🌬️</div>
+                <h3>Breathing Exercise</h3>
+                <p>5 min &middot; Box breathing</p>
+            </div>
+            <div class="card">
+                <div class="icon">📝</div>
+                <h3>Gratitude Journal</h3>
+                <p>Write 3 things you're grateful for today.</p>
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <blockquote>"Almost everything will work again if you unplug it for a few minutes, including you."</blockquote>
+            <cite>Anne Lamott</cite>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Section navigation
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+
+    // Greeting based on time of day
+    (function setGreeting() {
+        const h = new Date().getHours();
+        const el = document.getElementById('greeting');
+        if (h < 12) el.textContent = 'Good morning!';
+        else if (h < 18) el.textContent = 'Good afternoon!';
+        else el.textContent = 'Good evening!';
+    })();
+
+    // Checklist toggle
+    function toggleCheck(item) {
+        const cb = item.querySelector('input[type="checkbox"]');
+        cb.checked = !cb.checked;
+        item.classList.toggle('done', cb.checked);
+    }
+
+    // Water tracker
+    (function initWater() {
+        const container = document.getElementById('water-glasses');
+        let filled = 0;
+        for (let i = 0; i < 8; i++) {
+            const glass = document.createElement('div');
+            glass.className = 'water-glass';
+            glass.addEventListener('click', () => {
+                filled = i + 1;
+                container.querySelectorAll('.water-glass').forEach((g, idx) => {
+                    g.classList.toggle('filled', idx < filled);
+                });
+                document.getElementById('water-info').textContent =
+                    filled + ' of 8 glasses (' + (filled * 250) + ' ml)';
+                document.getElementById('water-count-stat').textContent = filled + ' / 8';
+            });
+            container.appendChild(glass);
+        }
+    })();
+
+    // Mood tracker
+    function selectMood(btn, label) {
+        document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('mood-log').textContent = 'Logged: ' + label + ' at ' + now;
+    }
+</script>
+
 </body>
 </html>
