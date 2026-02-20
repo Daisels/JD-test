@@ -1,0 +1,98 @@
+:root {
+  /* Area colors */
+  --color-sports: #E85D3A;
+  --color-meditation: #8B6FD0;
+  --color-reading: #2D9CDB;
+  --color-social: #F2994A;
+  --color-business: #27AE60;
+  --color-life-tasks: #EB5757;
+  --color-work-tasks: #2F80ED;
+
+  /* Area colors - light variants (for backgrounds) */
+  --color-sports-light: #FEF0EC;
+  --color-meditation-light: #F3EFFE;
+  --color-reading-light: #EBF5FB;
+  --color-social-light: #FEF3E8;
+  --color-business-light: #E9F7EF;
+  --color-life-tasks-light: #FDECEC;
+  --color-work-tasks-light: #EBF2FE;
+
+  /* Base palette */
+  --bg-primary: #F7F8FA;
+  --bg-card: #FFFFFF;
+  --bg-nav: #FFFFFF;
+  --text-primary: #1A1A2E;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --border: #E5E7EB;
+  --border-light: #F3F4F6;
+  --danger: #EF4444;
+  --success: #10B981;
+  --warning: #F59E0B;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height: 1.5;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-primary: #111827;
+  --bg-card: #1F2937;
+  --bg-nav: #1F2937;
+  --text-primary: #F9FAFB;
+  --text-secondary: #D1D5DB;
+  --text-muted: #9CA3AF;
+  --border: #374151;
+  --border-light: #1F2937;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+
+  --color-sports-light: #3D1A0F;
+  --color-meditation-light: #2A1F4A;
+  --color-reading-light: #0F2A3D;
+  --color-social-light: #3D2510;
+  --color-business-light: #0F3D1F;
+  --color-life-tasks-light: #3D1010;
+  --color-work-tasks-light: #0F1F3D;
+}

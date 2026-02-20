@@ -1,0 +1,274 @@
+/* Area-specific accent colors applied via data attribute */
+[data-area="sports"] { --accent-color: var(--color-sports); --accent-light: var(--color-sports-light); }
+[data-area="meditation"] { --accent-color: var(--color-meditation); --accent-light: var(--color-meditation-light); }
+[data-area="reading"] { --accent-color: var(--color-reading); --accent-light: var(--color-reading-light); }
+[data-area="social"] { --accent-color: var(--color-social); --accent-light: var(--color-social-light); }
+[data-area="business"] { --accent-color: var(--color-business); --accent-light: var(--color-business-light); }
+[data-area="life-tasks"] { --accent-color: var(--color-life-tasks); --accent-light: var(--color-life-tasks-light); }
+[data-area="work-tasks"] { --accent-color: var(--color-work-tasks); --accent-light: var(--color-work-tasks-light); }
+
+/* Dashboard area cards */
+.area-card {
+  --accent-color: var(--border);
+  --accent-light: var(--border-light);
+  border-top: 3px solid var(--accent-color);
+}
+
+.area-card[data-area="sports"] { --accent-color: var(--color-sports); --accent-light: var(--color-sports-light); }
+.area-card[data-area="meditation"] { --accent-color: var(--color-meditation); --accent-light: var(--color-meditation-light); }
+.area-card[data-area="reading"] { --accent-color: var(--color-reading); --accent-light: var(--color-reading-light); }
+.area-card[data-area="social"] { --accent-color: var(--color-social); --accent-light: var(--color-social-light); }
+.area-card[data-area="business"] { --accent-color: var(--color-business); --accent-light: var(--color-business-light); }
+.area-card[data-area="life-tasks"] { --accent-color: var(--color-life-tasks); --accent-light: var(--color-life-tasks-light); }
+.area-card[data-area="work-tasks"] { --accent-color: var(--color-work-tasks); --accent-light: var(--color-work-tasks-light); }
+
+.area-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.area-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.area-card-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin-top: var(--sp-3);
+}
+
+.area-card-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+}
+
+.area-card-stat-label {
+  color: var(--text-muted);
+}
+
+.area-card-stat-value {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Nav tab dots get area colors */
+.nav-tab[data-area="sports"] .nav-tab-dot { background: var(--color-sports); }
+.nav-tab[data-area="meditation"] .nav-tab-dot { background: var(--color-meditation); }
+.nav-tab[data-area="reading"] .nav-tab-dot { background: var(--color-reading); }
+.nav-tab[data-area="social"] .nav-tab-dot { background: var(--color-social); }
+.nav-tab[data-area="business"] .nav-tab-dot { background: var(--color-business); }
+.nav-tab[data-area="life-tasks"] .nav-tab-dot { background: var(--color-life-tasks); }
+.nav-tab[data-area="work-tasks"] .nav-tab-dot { background: var(--color-work-tasks); }
+
+/* Area view headers with accent */
+.area-view .area-header h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.area-header-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  flex-shrink: 0;
+}
+
+/* Meditation area - calmer feel */
+.area-meditation {
+  --accent-color: var(--color-meditation);
+}
+
+.area-meditation .card {
+  border-color: var(--color-meditation-light);
+}
+
+/* Contact cards */
+.contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: background var(--transition-fast);
+}
+
+.contact-card:hover {
+  background: var(--border-light);
+}
+
+.contact-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-light, var(--border-light));
+  color: var(--accent-color, var(--text-muted));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-name {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.contact-relationship {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.contact-last-contact {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: var(--sp-1);
+}
+
+/* Task items */
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.task-item:hover {
+  background: var(--border-light);
+}
+
+.task-item.task-done {
+  opacity: 0.6;
+}
+
+.task-item.task-done .task-title {
+  text-decoration: line-through;
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  margin-top: 2px;
+}
+
+.task-done .task-checkbox {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.task-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.task-meta {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-1);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.task-due.overdue {
+  color: var(--danger);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Reading items */
+.book-item {
+  display: flex;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.book-cover {
+  width: 48px;
+  height: 68px;
+  background: var(--color-reading-light);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-reading);
+  flex-shrink: 0;
+  font-size: var(--font-size-lg);
+}
+
+.book-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.book-author {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.book-progress {
+  margin-top: var(--sp-2);
+}
+
+.book-progress-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-1);
+}
+
+/* Star rating */
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  color: var(--border);
+  cursor: pointer;
+}
+
+.star.filled {
+  color: #F59E0B;
+}
